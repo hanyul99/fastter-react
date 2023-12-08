@@ -40,7 +40,7 @@ const FeedDetail = () => {
       }
     };
     fetchPost();
-  }, [feedId]);
+  }, [currentUser, feedId]);
 
   useEffect(() => {
     const fetchComment = async () => {
