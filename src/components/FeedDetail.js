@@ -22,7 +22,6 @@ const FeedDetail = () => {
   const { feedId } = useParams(); // useParams 훅을 이용해 feedId를 얻습니다.
   const [visibility, setVisibility] = useState(VisibilityChoices.EVERYONE);
   const [post, setPost] = useState({});
-  const [isAuthor, setIsAuthor] = useState(false);
   const [comments, setComments] = useState([]);
   const currentUser = getDecodedPayload();
 
@@ -32,15 +31,12 @@ const FeedDetail = () => {
         const response = await fetchUtility.get(`/feeds/${feedId}`);
         const post = await response.json();
         setPost(post);
-        if (currentUser && currentUser.user_id === post.user_id) {
-          setIsAuthor(true);
-        }
       } catch (error) {
         console.error('Error fetching post:', error);
       }
     };
     fetchPost();
-  }, [currentUser, feedId]);
+  }, [feedId]);
 
   useEffect(() => {
     const fetchComment = async () => {
@@ -80,7 +76,7 @@ const FeedDetail = () => {
               <Card.Text>{post.content}</Card.Text>
             </Card.Body>
           </Card>
-          {isAuthor && (
+          {post.author && currentUser.user_id === post.author.id && (
           <>
           <ButtonGroup className='m-3'>
             <ToggleButtonGroup type="radio" name="visibility" value={visibility} onChange={handleVisibilityChange}>
