@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'http://fastter1-env.eba-hg6sphmu.us-east-1.elasticbeanstalk.com';
 
 const getTokens = () => {
   const accessToken = localStorage.getItem('accessToken');
@@ -48,7 +48,7 @@ const fetchUtility = {
         console.error('Fetch GET Error:', error);
       }
     },
-  
+
     post: async (url, data, headers = {}) => {
       try {
         const response = await fetch(BASE_URL + url, {
@@ -68,7 +68,7 @@ const fetchUtility = {
         console.error('Fetch GET Error:', error);
       }
     },
-  
+
     put: async (url, data, headers = {}) => {
       try {
         const response = await fetch(BASE_URL + url, {
@@ -88,7 +88,7 @@ const fetchUtility = {
         console.error('Fetch GET Error:', error);
       }
     },
-  
+
     delete: async (url, headers = {}) => {
       try {
         const response = await fetch(BASE_URL + url, {
@@ -108,7 +108,7 @@ const fetchUtility = {
         console.error('Fetch GET Error:', error);
       }
     },
-  
+
     patch: async (url, data, headers = {}) => {
       try {
         const response = await fetch(BASE_URL + url, {
@@ -129,7 +129,6 @@ const fetchUtility = {
       }
     },
   };
-  
+
   export default fetchUtility;
 
-  

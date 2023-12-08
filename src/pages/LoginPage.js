@@ -18,7 +18,7 @@ function LoginPage() {
     e.preventDefault(); // 폼 제출 기본 동작 방지
     // 로그인 요청 보내기
     try {
-      const response = await fetch('http://localhost:8000/users/login', { // 여기에 실제 API 엔드포인트 주소를 넣어야 합니다.
+      const response = await fetch('http://fastter1-env.eba-hg6sphmu.us-east-1.elasticbeanstalk.com/users/login', { // 여기에 실제 API 엔드포인트 주소를 넣어야 합니다.
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ function LoginPage() {
     // 로그인 요청 보내기
     try {
       console.log(credentials);
-      const response = await fetch('http://localhost:8000/users/google-login', {
+      const response = await fetch('http://fastter1-env.eba-hg6sphmu.us-east-1.elasticbeanstalk.com/users/google-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,16 +66,16 @@ function LoginPage() {
       console.error('로그인 실패 오류:', error);
     }
   }
-  
-  
+
+
 
   return (
     <Container style={{ width: '600px', marginTop: '50px' }}>
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>유저명</Form.Label>
-          <Form.Control 
-            placeholder="유저명 또는 이메일" 
+          <Form.Control
+            placeholder="유저명 또는 이메일"
             value={userIdentifier} // value를 상태에 연결
             onChange={(e) => setUserIdentifier(e.target.value)} // 입력 값이 변경될 때마다 상태 업데이트
           />
@@ -83,18 +83,18 @@ function LoginPage() {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>비밀번호</Form.Label>
-        <Form.Control 
-            type="password" 
-            placeholder="비밀번호" 
+        <Form.Control
+            type="password"
+            placeholder="비밀번호"
             value={password} // value를 상태에 연결
             onChange={(e) => setPassword(e.target.value)} // 입력 값이 변경될 때마다 상태 업데이트
           />
         </Form.Group>
 
-        
+
         <Button className="m-3" variant="primary" type="submit">
           로그인
-        </Button>        
+        </Button>
 
         <Button variant='ghost' onClick={goToSignup}>
           회원가입
