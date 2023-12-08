@@ -25,7 +25,7 @@ function SignupPage() {
     e.preventDefault();
     try {
       const payload = { email, username, password };
-      const response = await fetchUtility.post('/users/register', payload);
+      await fetchUtility.post('/users/register', payload);
       // 성공적으로 가입 후 로그인 페이지로 이동
       navigate('/login');
     } catch (error) {
