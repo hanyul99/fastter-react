@@ -1,0 +1,36 @@
+name: Deploy React App to AWS S3
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 작동
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # 최신 Ubuntu 환경에서 실행
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # 사용하는 Node.js 버전
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to AWS S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # S3 버킷 이름
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS 접근 키
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # AWS 비밀 키
+        AWS_REGION: 'ap-northeast-2'  # AWS 리전 (예: us-east-1)
+        SOURCE_DIR: 'build'  # 빌드된 파일이 있는 디렉토리
